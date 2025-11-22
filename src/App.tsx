@@ -3,6 +3,8 @@ import Cart from "./components/cart";
 import Container from "./components/container";
 import Products from "./components/products";
 import type { Dessert } from "./types/products";
+import CartEmpty from "./components/cart-empty";
+import CartItems from "./components/cart-items";
 
 function App() {
   const [products, setProducts] = useState<Dessert[]>([]);
@@ -21,7 +23,10 @@ function App() {
       <Container>
         <div className="grid grid-cols-[8fr_4fr] max-lg:grid-cols-1 gap-8">
           <Products products={products}/>
-          <Cart />
+          <Cart>
+            {/* <CartEmpty/> */}
+            <CartItems />
+          </Cart>
         </div>
       </Container>
     </main>

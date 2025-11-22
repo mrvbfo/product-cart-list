@@ -2,7 +2,7 @@ import { Button } from "./ui/button";
 
 export default function BtnDecrementIncrement() {
   return (
-    <div className="bg-primary rounded-full py-3 px-7 flex items-center justify-between">
+    <div className="bg-primary rounded-full py-3 px-7 flex items-center justify-between min-w-40">
       <Button
         size={"icon"}
         className="size-5 border border-white rounded-full group hover:bg-white"

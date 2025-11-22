@@ -5,7 +5,7 @@ export default function BtnAddToCart() {
     <Button
           variant={"outline"}
           size={"lg"}
-          className="bg-white text-preset-4-bold has-[>svg]:px-7 has-[>svg]:py-5 hover:border-primary hover:bf-white hover:text-primary"
+          className="bg-white text-preset-4-bold has-[>svg]:px-7 has-[>svg]:py-5 hover:border-primary hover:bg-white hover:text-primary"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

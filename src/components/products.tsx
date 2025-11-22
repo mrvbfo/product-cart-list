@@ -6,6 +6,8 @@ type ProductsProps = {
   products: Dessert[];
 };
 
+const quantity = 0
+
 export default function Products({ products }: ProductsProps) {
   return (
     <section id="desserts">
@@ -36,8 +38,7 @@ export default function Products({ products }: ProductsProps) {
                 />
               </picture>
               <div className="absolute -bottom-5 left-1/2 transform -translate-x-1/2">
-                <BtnAddToCart />
-                <BtnDecrementIncrement />
+              {quantity > 0 ? <BtnDecrementIncrement /> : <BtnAddToCart />}
               </div>
             </div>
 
