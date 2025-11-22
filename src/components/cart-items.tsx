@@ -1,3 +1,4 @@
+import DialogConfirmation from "./dialog-confirmation";
 import { Button } from "./ui/button";
 import { CardAction, CardContent, CardFooter } from "./ui/card";
 
@@ -128,10 +129,11 @@ export default function CartItems() {
             />
           </svg>
           <p className="text-preset-4">
-            This is a <b className="text-preset-4-bold">carbon-neutral</b> delivery
+            This is a <b className="text-preset-4-bold">carbon-neutral</b>{" "}
+            delivery
           </p>
         </div>
-        <Button size={"lg"} className="w-full py-4">Confirm Order</Button>
+        <DialogConfirmation />
       </CardFooter>
     </>
   );

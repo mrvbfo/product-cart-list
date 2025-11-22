@@ -5,6 +5,7 @@ import Products from "./components/products";
 import type { Dessert } from "./types/products";
 import CartEmpty from "./components/cart-empty";
 import CartItems from "./components/cart-items";
+import ProductItem from "./components/product-item";
 
 function App() {
   const [products, setProducts] = useState<Dessert[]>([]);
@@ -22,7 +23,11 @@ function App() {
     <main>
       <Container>
         <div className="grid grid-cols-[8fr_4fr] max-lg:grid-cols-1 gap-8">
-          <Products products={products}/>
+          <Products>
+            {products.map((product) => (
+              <ProductItem key={product.name} product={product} />
+            ))}
+          </Products>
           <Cart>
             {/* <CartEmpty/> */}
             <CartItems />
