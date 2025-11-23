@@ -1,14 +1,17 @@
 import type { Dessert } from "@/types/products";
 import BtnAddToCart from "./btn-add-to-card";
 import BtnDecrementIncrement from "./btn-decrement-increment";
+import { useCartStore } from "@/store/cart";
 
-type ProductItemProps ={
-    product: Dessert
-}
+type ProductItemProps = {
+  product: Dessert;
+};
 
-const quantity=0
+export default function ProductItem({ product }: ProductItemProps) {
+  const { cartItems } = useCartStore();
+  const quantity =
+    cartItems.find((item) => item.name === product.name)?.quantity || 0;
 
-export default function ProductItem({product}:ProductItemProps) {
   return (
     <article key={product.name}>
       <div className="mb-9 relative">
@@ -34,7 +37,11 @@ export default function ProductItem({product}:ProductItemProps) {
           />
         </picture>
         <div className="absolute -bottom-5 left-1/2 transform -translate-x-1/2">
-          {quantity > 0 ? <BtnDecrementIncrement /> : <BtnAddToCart />}
+          {quantity > 0 ? (
+            <BtnDecrementIncrement product={product}/>
+          ) : (
+            <BtnAddToCart product={product} />
+          )}
         </div>
       </div>
 

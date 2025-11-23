@@ -1,112 +1,58 @@
+import { useCartStore } from "@/store/cart";
 import DialogConfirmation from "./dialog-confirmation";
 import { Button } from "./ui/button";
 import { CardAction, CardContent, CardFooter } from "./ui/card";
 
 export default function CartItems() {
+  const { cartItems, removeFromCart, getTotalPrice } = useCartStore();
   return (
     <>
       <CardContent>
-        <ul className="flex flex-col gap-4 divide-y divide-rose-100">
-          <li className="pb-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <h3 className="text-preset-4-bold mb-2">Classic Tiramisu</h3>
-                <div className="inline-flex gap-2">
-                  <span className="text-preset-4-bold text-primary">1x</span>
-                  <span className="text-preset-4 text-muted">@ $5.50</span>
-                  <strong className="text-preset-4-bold text-muted">
-                    $5.50
-                  </strong>
+        <ul className="flex flex-col gap-4 ">
+          {cartItems.map((item) => (
+            <li key={item.name} className="pb-4 divide-y divide-rose-100">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h3 className="text-preset-4-bold mb-2">{item.name}</h3>
+                  <div className="inline-flex gap-2">
+                    <span className="text-preset-4-bold text-primary">{item.quantity}x</span>
+                    <span className="text-preset-4 text-muted">@ ${item.price.toFixed(2)}</span>
+                    <strong className="text-preset-4-bold text-muted">
+                      ${(item.price * item.quantity).toFixed(2)}
+                    </strong>
+                  </div>
                 </div>
-              </div>
-              <CardAction className="self-center">
-                <Button size={"icon"} className="size-5" variant={"outline"}>
-                  <svg
-                    className="size-3"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="10"
-                    height="10"
-                    fill="none"
-                    viewBox="0 0 10 10"
+                <CardAction className="self-center">
+                  <Button
+                  onClick={() => removeFromCart(item.name)}
+                    size={"icon"}
+                    className="size-5"
+                    variant={"outline"}
+                    aria-label="remove item"
                   >
-                    <path
-                      fill="#CAAFA7"
-                      d="M8.375 9.375 5 6 1.625 9.375l-1-1L4 5 .625 1.625l1-1L5 4 8.375.625l1 1L6 5l3.375 3.375-1 1Z"
-                    />
-                  </svg>
-                </Button>
-              </CardAction>
-            </div>
-          </li>
-          <li className="pb-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <h3 className="text-preset-4-bold mb-2">
-                  Vanilla Bean Creme Brulee
-                </h3>
-                <div className="inline-flex gap-2">
-                  <span className="text-preset-4-bold text-primary">1x</span>
-                  <span className="text-preset-4 text-muted">@ $5.50</span>
-                  <strong className="text-preset-4-bold text-muted">
-                    $5.50
-                  </strong>
-                </div>
+                    <svg
+                      className="size-3"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="10"
+                      height="10"
+                      fill="none"
+                      viewBox="0 0 10 10"
+                    >
+                      <path
+                        fill="#CAAFA7"
+                        d="M8.375 9.375 5 6 1.625 9.375l-1-1L4 5 .625 1.625l1-1L5 4 8.375.625l1 1L6 5l3.375 3.375-1 1Z"
+                      />
+                    </svg>
+                  </Button>
+                </CardAction>
               </div>
-              <CardAction className="self-center">
-                <Button size={"icon"} className="size-5" variant={"outline"}>
-                  <svg
-                    className="size-3"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="10"
-                    height="10"
-                    fill="none"
-                    viewBox="0 0 10 10"
-                  >
-                    <path
-                      fill="#CAAFA7"
-                      d="M8.375 9.375 5 6 1.625 9.375l-1-1L4 5 .625 1.625l1-1L5 4 8.375.625l1 1L6 5l3.375 3.375-1 1Z"
-                    />
-                  </svg>
-                </Button>
-              </CardAction>
-            </div>
-          </li>
-          <li className="pb-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <h3 className="text-preset-4-bold mb-2">Vanilla Panna Cotta</h3>
-                <div className="inline-flex gap-2">
-                  <span className="text-preset-4-bold text-primary">1x</span>
-                  <span className="text-preset-4 text-muted">@ $5.50</span>
-                  <strong className="text-preset-4-bold text-muted">
-                    $5.50
-                  </strong>
-                </div>
-              </div>
-              <CardAction className="self-center">
-                <Button size={"icon"} className="size-5" variant={"outline"}>
-                  <svg
-                    className="size-3"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="10"
-                    height="10"
-                    fill="none"
-                    viewBox="0 0 10 10"
-                  >
-                    <path
-                      fill="#CAAFA7"
-                      d="M8.375 9.375 5 6 1.625 9.375l-1-1L4 5 .625 1.625l1-1L5 4 8.375.625l1 1L6 5l3.375 3.375-1 1Z"
-                    />
-                  </svg>
-                </Button>
-              </CardAction>
-            </div>
-          </li>
+            </li>
+          ))}
         </ul>
         <div className="my-6 flex items-center justify-between">
           <p className="text-preset-4">Order Total</p>
           <p>
-            <strong>$46.50</strong>
+            <strong>${getTotalPrice().toFixed(2)}</strong>
           </p>
         </div>
       </CardContent>

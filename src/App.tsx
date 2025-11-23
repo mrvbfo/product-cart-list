@@ -6,8 +6,10 @@ import type { Dessert } from "./types/products";
 import CartEmpty from "./components/cart-empty";
 import CartItems from "./components/cart-items";
 import ProductItem from "./components/product-item";
+import { useCartStore } from "./store/cart";
 
 function App() {
+  const { cartItems } = useCartStore();
   const [products, setProducts] = useState<Dessert[]>([]);
 
   useEffect(() => {
@@ -28,10 +30,7 @@ function App() {
               <ProductItem key={product.name} product={product} />
             ))}
           </Products>
-          <Cart>
-            {/* <CartEmpty/> */}
-            <CartItems />
-          </Cart>
+          <Cart>{cartItems.length > 0 ? <CartItems /> : <CartEmpty />}</Cart>
         </div>
       </Container>
     </main>

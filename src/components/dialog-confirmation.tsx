@@ -10,8 +10,10 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "./ui/button";
 import TableOrder from "./table-order";
+import { useCartStore } from "@/store/cart";
 
 export default function DialogConfirmation() {
+  const { clearCart } = useCartStore();
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -48,7 +50,7 @@ export default function DialogConfirmation() {
         <TableOrder />
         <DialogFooter>
           <DialogClose asChild>
-            <Button size={"lg"} className="py-4 w-full">
+            <Button onClick={clearCart} size={"lg"} className="py-4 w-full">
               Start New Order
             </Button>
           </DialogClose>
